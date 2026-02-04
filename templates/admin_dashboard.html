@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - Leave Management</title>
+</head>
+<body>
+    <h2>Welcome, {{ session['admin'] }}</h2>
+
+    <h3>All Leave Requests</h3>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Staff Username</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Days</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Admin Remark</th>
+            <th>Action</th>
+        </tr>
+        {% for leave in leaves %}
+        <tr>
+            <td>{{ leave[1] }}</td>
+            <td>{{ leave[2] }}</td>
+            <td>{{ leave[3] }}</td>
+            <td>{{ leave[4] }}</td>
+            <td>{{ leave[5] }}</td>
+            <td>{{ leave[6] }}</td>
+            <td>{{ leave[7] }}</td>
+            <td>
+                {% if leave[6] == 'Pending' %}
+                <a href="/update_leave/{{ leave[0] }}/Approved"><button>Approve</button></a>
+                <a href="/update_leave/{{ leave[0] }}/Rejected"><button>Reject</button></a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/"><button>Logout</button></a>
+</body>
+</html>
